@@ -20,7 +20,8 @@
             			var json = $.parseJSON(dataText);   
             			if(json.access_token != null){            				            				
             				params = {"access_token": json.access_token, "expires_in": json.expires_in};            				
-            				post("http://localhost/processoscoletivos/certificado-social", params);            					
+            				//post("http://localhost/processoscoletivos/certificado-social", params);            					
+            				post("http://leasdle01.icei.pucminas.br/processoscoletivos/certificado-social", params);
             			}else{
             				$('#output').append(json.error_description).append("<br\>");
             			}
