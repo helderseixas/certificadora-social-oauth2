@@ -28,14 +28,20 @@ public class SegurancaAPI extends Modelos {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date expiracaoToken = new Date();
 
-	@OneToOne
+//	@OneToOne
+//	private Usuario usuario;		
+	private String usuarioCPF;
+	
+	@Transient
 	private Usuario usuario;
 
 	public SegurancaAPI(String token, Date expiracaoToken, Usuario usuario) {
 		this.token = token;
 		this.expiracaoToken = expiracaoToken;
 		this.usuario = usuario;
+		this.usuarioCPF = usuario.getLogin();
 	}
+
 
 	public SegurancaAPI() {
 	}
@@ -69,8 +75,16 @@ public class SegurancaAPI extends Modelos {
 		return expiracaoToken;
 	}
 
+	public String getUsuarioCPF() {
+		return usuarioCPF;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

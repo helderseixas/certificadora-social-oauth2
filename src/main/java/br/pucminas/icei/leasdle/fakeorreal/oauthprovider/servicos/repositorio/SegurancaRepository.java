@@ -11,6 +11,8 @@ public interface SegurancaRepository extends CrudRepository<SegurancaAPI, Long> 
         @Query("SELECT s FROM SegurancaAPI s WHERE s.token = :token")
         SegurancaAPI findByToken(@Param("token") String token);
         
-        SegurancaAPI findByUsuario(Usuario usuario);
+        //SegurancaAPI findByUsuario(Usuario usuario);
+        @Query("SELECT s FROM SegurancaAPI s WHERE s.usuarioCPF = :usuarioCPF")
+        SegurancaAPI findByUsuarioCPF(@Param("usuarioCPF") String usuarioCPF);
         
 }

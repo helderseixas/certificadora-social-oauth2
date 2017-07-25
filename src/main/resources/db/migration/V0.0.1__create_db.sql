@@ -43,18 +43,29 @@ CREATE TABLE perfil_permissao(
 --    CONSTRAINT usuario_perfil_fkey FOREIGN KEY (perfil_id) REFERENCES perfil(id)
 --);
 
-CREATE TABLE usuario (
-    id bigint NOT NULL,
-    datacriacao timestamp,
-    dataatualizacao timestamp,
-    nome varchar(255) NOT NULL,
-    email varchar(255) NOT NULL,
-    login varchar(20) NOT NULL UNIQUE,
-    senha varchar(50) NOT NULL,
-    perfil_id  bigint NOT NULL,
-    CONSTRAINT usuario_pkey PRIMARY KEY (id),
-    CONSTRAINT usuario_perfil_fkey FOREIGN KEY (perfil_id) REFERENCES perfil(id)
-);
+--CREATE TABLE usuario (
+--    id bigint NOT NULL,
+--    datacriacao timestamp,
+--    dataatualizacao timestamp,
+--    nome varchar(255) NOT NULL,
+--    email varchar(255) NOT NULL,
+--    login varchar(20) NOT NULL UNIQUE,
+--    senha varchar(50) NOT NULL,
+--    perfil_id  bigint NOT NULL,
+--    CONSTRAINT usuario_pkey PRIMARY KEY (id),
+--    CONSTRAINT usuario_perfil_fkey FOREIGN KEY (perfil_id) REFERENCES perfil(id)
+--);
+
+--CREATE TABLE segurancaapi (
+--    id bigint NOT NULL,
+--    datacriacao timestamp,
+--    dataatualizacao timestamp,
+--    token varchar(1000) NOT NULL,
+--    expiracaoToken timestamp,
+--    usuario_id  bigint NOT NULL,
+--    CONSTRAINT segurancaapi_pkey PRIMARY KEY (id),
+--    CONSTRAINT segurancaapi_usuario_fkey FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+--);
 
 CREATE TABLE segurancaapi (
     id bigint NOT NULL,
@@ -62,7 +73,6 @@ CREATE TABLE segurancaapi (
     dataatualizacao timestamp,
     token varchar(1000) NOT NULL,
     expiracaoToken timestamp,
-    usuario_id  bigint NOT NULL,
-    CONSTRAINT segurancaapi_pkey PRIMARY KEY (id),
-    CONSTRAINT segurancaapi_usuario_fkey FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+    usuarioCPF  varchar(14) NOT NULL,
+    CONSTRAINT segurancaapi_pkey PRIMARY KEY (id)
 );

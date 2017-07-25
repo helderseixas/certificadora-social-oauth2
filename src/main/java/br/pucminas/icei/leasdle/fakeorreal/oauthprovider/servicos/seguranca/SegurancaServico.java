@@ -6,13 +6,17 @@ import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.excecoes.TokenInvalidoE
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.excecoes.UsuarioOuSenhaInvalidaException;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.SegurancaAPI;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.Usuario;
+import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.FakeOrRealUsuarioRepository;
+import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.repositorio.FakeOrRealDatabase;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.repositorio.SegurancaRepository;
-import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.repositorio.UsuarioRepository;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.util.DateUtils;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.util.FormatadorUtil;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.web.util.SegurancaAPIThreadLocal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
@@ -46,14 +50,23 @@ public class SegurancaServico {
         private SegurancaRepository segurancaRepository;
 
         @Autowired
-        private UsuarioRepository usuarioRepository;
+        private FakeOrRealUsuarioRepository usuarioRepository;
+        //private UsuarioRepository usuarioRepository;
 
         private SegurancaAPI retornarPorToken(String token) {
-                return this.segurancaRepository.findByToken(token);
+                //return this.segurancaRepository.findByToken(token);
+    		SegurancaAPI segurancaAPI = this.segurancaRepository.findByToken(token);
+    		segurancaAPI.setUsuario(usuarioRepository.findByLogin(segurancaAPI.getUsuarioCPF()));
+    		return segurancaAPI;    		
         }
 
         private SegurancaAPI retornarPorUsuario(Usuario usuario) {
-                return this.segurancaRepository.findByUsuario(usuario);
+                //return this.segurancaRepository.findByUsuario(usuario);
+        	SegurancaAPI segurancaAPI = this.segurancaRepository.findByUsuarioCPF(usuario.getLogin());
+        	if(segurancaAPI!=null) {
+        		segurancaAPI.setUsuario(usuario);
+        	}
+        	return segurancaAPI;
         }
 
         /**
@@ -91,7 +104,7 @@ public class SegurancaServico {
                                         this.segurancaRepository.save(segurancaAPI);
                                         throw new TokenExpiradoException("Token de acesso expirado. Gere um novo token e tente novamente.");
                                 } else {
-                                        Hibernate.initialize(segurancaAPI.getUsuario().getPerfil().getPermissoes()); //force! :/
+                                        //Hibernate.initialize(segurancaAPI.getUsuario().getPerfil().getPermissoes()); //force! :/
                                         SegurancaAPIThreadLocal.setSegurancaAPI(segurancaAPI);
                                 }
                         } else {
@@ -124,7 +137,8 @@ public class SegurancaServico {
 
                 SegurancaAPI segurancaAPI = this.retornarPorUsuario(usuario);
                 if (segurancaAPI == null) {
-                        segurancaAPI = new SegurancaAPI(token, proximaDataExpiracao, usuario);
+                        //segurancaAPI = new SegurancaAPI(token, proximaDataExpiracao, usuario);
+                	segurancaAPI = new SegurancaAPI(token, proximaDataExpiracao, usuario);
                 } else {
                         segurancaAPI.atualizarToken(token, proximaDataExpiracao);
                 }
@@ -163,6 +177,7 @@ public class SegurancaServico {
         
         private Usuario retornarPorLoginESenha(String login, String senha) throws UsuarioOuSenhaInvalidaException{
                 Usuario  usuario = this.usuarioRepository.findByLoginAndSenha(login, FormatadorUtil.encryptMD5(senha));
+        		
                 if(usuario == null){
                         throw new UsuarioOuSenhaInvalidaException("Usuário não encontrado.");
                 }
@@ -206,12 +221,14 @@ public class SegurancaServico {
                                 proximaDataExpiracao = e.getSegurancaAPI().getExpiracaoToken();
                         }
 
-                        return OAuthASResponse.tokenResponse(HttpServletResponse.SC_OK).setAccessToken(accessToken).setExpiresIn(
+                        OAuthResponse resultado = OAuthASResponse.tokenResponse(HttpServletResponse.SC_OK).setAccessToken(accessToken).setExpiresIn(
                                 this.transformarProximaDataExpiracaoEmSegundos(new Date(), proximaDataExpiracao))
                                 .setParam("nome", usuario.getNome())
-                                .setParam("cpf", usuario.getLogin())
+                                .setParam("login", usuario.getLogin())
                                 .setParam("email", usuario.getEmail())
                                 .buildJSONMessage();
+                        Logger.getLogger(FakeOrRealDatabase.class.getName()).log(Level.INFO, resultado.getBody());
+                        return resultado;
 
                 } catch (OAuthProblemException e) {
                         return this.retornarErroOAuth(HttpServletResponse.SC_UNAUTHORIZED, CodeResponse.INVALID_REQUEST, e);
@@ -237,9 +254,11 @@ public class SegurancaServico {
         public SegurancaAPI getUsuarioLogado() throws TokenInvalidoException {
                 SegurancaAPI seg = SegurancaAPIThreadLocal.getSegurancaAPI();
                 if (seg == null) {
-                        throw new TokenInvalidoException("Usuário não logado.");
+                	Logger.getLogger(FakeOrRealDatabase.class.getName()).log(Level.INFO, "Usuário não logado.");
+                    throw new TokenInvalidoException("Usuário não logado.");
                 } else {
-                        return seg;
+                	Logger.getLogger(FakeOrRealDatabase.class.getName()).log(Level.INFO, seg.getToken());
+                    return seg;
                 }
         }
 

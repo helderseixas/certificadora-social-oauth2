@@ -3,7 +3,7 @@
   
         <persistence-unit name="main_persistenceUnit" transaction-type="RESOURCE_LOCAL">
                 <class>br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.Perfil</class>
-                <class>br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.Usuario</class>
+                <!-- <class>br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.Usuario</class> -->
                 <class>br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.Permissao</class>
                 <class>br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.SegurancaAPI</class>
     

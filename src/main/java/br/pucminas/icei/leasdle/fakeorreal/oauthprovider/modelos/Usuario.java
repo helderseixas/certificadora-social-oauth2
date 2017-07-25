@@ -15,35 +15,36 @@ import javax.persistence.TableGenerator;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
-@Entity
-@NamedEntityGraph(name = "perfil.permissoes", attributeNodes = @NamedAttributeNode(value = "perfil", subgraph = "permissoes"), 
-               subgraphs = @NamedSubgraph(name = "permissoes", attributeNodes = @NamedAttributeNode("permissoes")))
-public class Usuario extends Modelos {
+//@Entity
+//@NamedEntityGraph(name = "perfil.permissoes", attributeNodes = @NamedAttributeNode(value = "perfil", subgraph = "permissoes"), 
+//               subgraphs = @NamedSubgraph(name = "permissoes", attributeNodes = @NamedAttributeNode("permissoes")))
+public class Usuario {
+//public class Usuario extends Modelos {	
         
         private static final long serialVersionUID = 8765060059417187982L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "usuarioGenerator")
-	@TableGenerator(name = "usuarioGenerator", allocationSize = 1)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.TABLE, generator = "usuarioGenerator")
+//	@TableGenerator(name = "usuarioGenerator", allocationSize = 1)
 	private Long id;
         
-        @NotEmpty
+        //@NotEmpty
         private String nome;
         
-        @NotEmpty
+        //@NotEmpty
         private String email;
         
-        @NotEmpty
-        @Size(min = 1, max = 20)
-        @Column(unique = true)
+        //@NotEmpty
+        //@Size(min = 1, max = 20)
+        //@Column(unique = true)
         private String login;
         
-        @NotEmpty
-        @Size(min = 1)
+        //@NotEmpty
+        //@Size(min = 1)
         private String senha;
         
-        @ManyToOne(optional = false)
-        private Perfil perfil;
+//        @ManyToOne(optional = false)
+//        private Perfil perfil;
 
         public Usuario() {
         }
@@ -56,7 +57,7 @@ public class Usuario extends Modelos {
                 this.login = login;
         }
         
-        @Override
+        //@Override
         public Long getId() {
                 return id;
         }
@@ -89,9 +90,9 @@ public class Usuario extends Modelos {
                 this.senha = senha;
         }
 
-        public Perfil getPerfil() {
-                return perfil;
-        }
+//        public Perfil getPerfil() {
+//                return perfil;
+//        }
 
 		public String getEmail() {
 			return email;

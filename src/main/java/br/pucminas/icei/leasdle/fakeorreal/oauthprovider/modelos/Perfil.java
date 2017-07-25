@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -32,8 +34,9 @@ public class Perfil extends Modelos {
         @ManyToMany
         private List<Permissao> permissoes;
         
-        @JsonIgnore
-        @OneToMany(mappedBy = "perfil")
+        //@JsonIgnore
+        //@OneToMany(mappedBy = "perfil")
+        @Transient        
         private List<Usuario> usuarios;
 
         public boolean contemRoleOuAdmin(RoleEnum roleConfigurada) {

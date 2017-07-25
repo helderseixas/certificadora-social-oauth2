@@ -22,11 +22,11 @@ INSERT INTO perfil_permissao(perfil_id, permissoes_id) VALUES (2, 1);
 INSERT INTO perfil_permissao(perfil_id, permissoes_id) VALUES (2, 2);
 
 
-INSERT INTO usuario(id, datacriacao, dataatualizacao, nome, email, login, senha, perfil_id)
-    VALUES (1, '2015-07-28', null, 'João da Silva', 'joao@teste.com', '111.111.111-11', '0192023a7bbd73250516f069df18b500', 1); --senha admin123
-
-INSERT INTO usuario(id, datacriacao, dataatualizacao, nome, email, login, senha, perfil_id)
-    VALUES (2, '2015-07-28', null, 'Maria da Silva', 'maria@teste.com', '222.222.222-22', 'a213033c0d9f7d83cd8f18d2f96be975', 2); --senha visitante123
+--INSERT INTO usuario(id, datacriacao, dataatualizacao, nome, email, login, senha, perfil_id)
+--    VALUES (1, '2015-07-28', null, 'João da Silva', 'joao@teste.com', '111.111.111-11', '0192023a7bbd73250516f069df18b500', 1); --senha admin123
+--
+--INSERT INTO usuario(id, datacriacao, dataatualizacao, nome, email, login, senha, perfil_id)
+--    VALUES (2, '2015-07-28', null, 'Maria da Silva', 'maria@teste.com', '222.222.222-22', 'a213033c0d9f7d83cd8f18d2f96be975', 2); --senha visitante123
 
 --INSERT INTO usuario(id, datacriacao, dataatualizacao, nome, login, senha, perfil_id)
 --    VALUES (1, '2015-07-28', null, 'Administrador :)', 'admin', '0192023a7bbd73250516f069df18b500', 1); --senha admin123
