@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+<html class="mdc-typography">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 	<link href="node_modules/material-components-web/dist/material-components-web.css"rel="stylesheet" >
 	
 	<style>
@@ -24,25 +26,27 @@
 		}
 
 		#login {
-			order:2;
-			display:flex;
+			order:3;
+			display:inline-block;
 			flex-direction:column;
 		}
 		
 		#descricao {
 			order:1;
-			margin-left:2em;
 		}
 
 		.mdc-card {
 			background-color:white;
-			padding-left: 15px;
-			padding-right: 15px;			
 		}
 		
 		#action_login {
 			justify-content:flex-end;
 		}
+		
+		#action_get_app {
+			justify-content:center;
+		}
+
 
 		#google-play-img {
 			height: auto;
@@ -111,9 +115,7 @@
 <title>Certificadora Social</title>
 </head>
 <body>
-		<h1 class="mdc-typography--display2" >Acessar sistema Processos Coletivos</h1>
-		
-		<br/><br/><br/>
+		<h1 style="text-align:center;"class="mdc-typography--display2" >Acessar sistema Processos Coletivos</h1>
 	
 		<div id="login_section">
 			<div class="mdc-typography--body1" id="descricao">
@@ -128,6 +130,8 @@
 					Através dele você pode acessar sistemas que requisitam rigorosa verificação da identidade do usuário.
 				</p>
 			</div>
+			
+			<div style="margin:1em;order:2"></div>
 	
 			<div id="login">
 				<div class="mdc-card">
@@ -152,7 +156,9 @@
 					</section>
 			
 					<section class="mdc-card__actions" id="action_login">
-						<input type="submit" class="mdc-button mdc-button--accent" id="call" value="Entrar" />
+						<button class="mdc-button mdc-button--accent" id="call">
+							Entrar
+						</button>
 					</section>
 				</div>
 			
@@ -167,7 +173,7 @@
 						Baixe o aplicativo FakeOrReal e faça seu cadastro.   
 					</section>
 		
-					<section class="mdc-card__actions">					
+					<section class="mdc-card__actions" id="action_get_app">					
 						<a href='https://play.google.com/store/apps/details?id=br.pucminas.fakeorreal&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
 							<img id="google-play-img" alt='Disponível no Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/pt-br_badge_web_generic.png'/>
 						</a>
@@ -178,5 +184,5 @@
 	
 		<script src="node_modules/material-components-web/dist/material-components-web.js"></script>
 		<script>mdc.autoInit()</script>
-</body>
+	</body>
 </html>
