@@ -6,8 +6,8 @@ import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.excecoes.TokenInvalidoE
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.excecoes.UsuarioOuSenhaInvalidaException;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.SegurancaAPI;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.Usuario;
-import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.FakeOrRealUsuarioRepository;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.repositorio.FakeOrRealDatabase;
+import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.repositorio.FakeOrRealUsuarioRepository;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.repositorio.SegurancaRepository;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.util.DateUtils;
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.util.FormatadorUtil;

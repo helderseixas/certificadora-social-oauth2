@@ -1,10 +1,8 @@
-package br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos;
+package br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.repositorio;
 
 import org.springframework.stereotype.Repository;
 
 import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.modelos.Usuario;
-import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.repositorio.FakeOrRealDatabase;
-import br.pucminas.icei.leasdle.fakeorreal.oauthprovider.servicos.repositorio.UsuarioRepository;
 
 /**
  *

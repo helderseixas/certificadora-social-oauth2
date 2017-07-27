@@ -36,6 +36,8 @@
 
 		.mdc-card {
 			background-color:white;
+			padding-left: 15px;
+			padding-right: 15px;			
 		}
 		
 		#action_login {
